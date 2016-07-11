@@ -6,6 +6,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('divvies', function() {
+    this.route('new');
+  });
+  this.route('divvy', {path: '/:divvy_id'}, function() {
+
+  });
 });
 
 export default Router;

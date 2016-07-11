@@ -1,0 +1,12 @@
+<h3>All Divvies</h3>
+
+<ul>
+	{{#each model as |divvy|}}
+		<li class='divvy-list'>
+			{{#link-to 'divvy' divvy}}
+			  {{divvy.title}}
+			{{/link-to}}
+		</li>
+
+	{{/each}}
+</ul>
