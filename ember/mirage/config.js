@@ -13,13 +13,15 @@ export default function() {
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
   this.get('/divvies', (schema) => {
-    let models =  schema.divvies.all().models;
+    let models = schema.divvies.all().models;
     return {divvies: models};
   });
 
-  this.post('/divvies', () => {
+  this.post('/divvies', (schema, request) => {
+    // don't want to override any existing ids, just dynamically add 1 to however many are in db already
+    let id = schema.divvies.all().models.length + 1;
     return {
-      divvy: {id: 4, title: 'Divvy 4'},
+      divvy: {id: id, title: JSON.parse(request.requestBody).divvy.title},
     };
   });
 
