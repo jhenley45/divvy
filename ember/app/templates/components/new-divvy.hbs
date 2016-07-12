@@ -1,0 +1,11 @@
+<div class='col-md-6'>
+	<div class="form-group">
+		Title {{input type="text" class="form-control" id="divvy-title" value=title size="60" placeholder='Divvy Title'}}
+	</div>
+	<button {{action "createDivvy"}}>Submit</button>
+
+	{{#if formError}}
+		<p class="error-message">Error: {{formError}}</p>
+	{{/if}}
+
+</div>
