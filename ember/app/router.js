@@ -9,7 +9,7 @@ Router.map(function() {
   this.route('divvies', function() {
     this.route('new');
   });
-  this.route('divvy', {path: '/:divvy_id'}, function() {
+  this.route('divvy', {path: 'divvy/:divvy_id'}, function() {
 
   });
 });

@@ -67,3 +67,9 @@ test('Should be able to go to a divvy page from the index route', function(asser
     assert.equal(find('#divvy-title').text().trim(), 'Divvy 1');
   });
 });
+
+test('Should be able to go to new divvy page from index route', function(assert) {
+  click(find('a:contains("Create New Divvy")')).then(function() {
+  	assert.equal(find('h3:contains("Create new divvy")').length, 1);
+  });
+});
