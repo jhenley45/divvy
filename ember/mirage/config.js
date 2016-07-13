@@ -25,6 +25,12 @@ export default function() {
     };
   });
 
+  this.get('/divvies/:id', (schema, request) => {
+    console.log(request.params.id);
+    let divvy = schema.divvies.find(request.params.id);
+    return { divvy: { id: divvy.id, title: divvy.title}};
+  });
+
   /*
     Shorthand cheatsheet:
 
