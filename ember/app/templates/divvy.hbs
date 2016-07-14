@@ -1,3 +1,15 @@
 <div id="divvy-title">
   {{model.title}}
 </div>
+
+{{#if model.payments.length}}
+  <div class="payments">
+    {{#each payments as |payments|}}
+      {{list-payment paymentBinding=payment delete="removePayment" edit="updatePayment"}}
+    {{/each}}
+  </div>
+{{else}}
+  <div class="warning-block">
+    There are currently no payments for this divvy
+  </div>
+{{/if}}

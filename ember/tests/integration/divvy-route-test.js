@@ -4,7 +4,7 @@ import startApp from '../helpers/start-app';
 
 var App;
 
-module('Integration - Trip Page', {
+module('Integration - Divvy Page', {
   beforeEach: function() {
     App = startApp();
     //visit('/divvies/1');
@@ -16,8 +16,20 @@ module('Integration - Trip Page', {
 
 test('Should show the divvy\'s title on the divvy route', (assert) => {
   let divvy = server.create('divvy', {title: 'Sunset over Hyrule'});
+
   visit('/divvies/' + divvy.id);
+
   andThen(() => {
     assert.equal(find('#divvy-title').text().trim(), divvy.title);
+  });
+});
+
+test('Should display a message if there are no existing payments for a divvy', function(assert) {
+  let divvy = server.create('divvy', {title: 'Sunset over Hyrule'});
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('div.warning-block:contains("There are currently no payments for this divvy")').length, 1);
   });
 });

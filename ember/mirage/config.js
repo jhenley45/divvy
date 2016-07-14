@@ -12,24 +12,21 @@ export default function() {
   this.namespace = 'api';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.get('/divvies', (schema) => {
-    let models = schema.divvies.all().models;
-    return {divvies: models};
-  });
+  // this.get('/divvies', (schema) => {
+  //   // let models = schema.divvies.all().models;
+  //   // return {divvies: models};
+  //   return schema.divvies.all();
+  // });
+  // this.get('/divvies/:id', (schema, request) => {
+  //   let divvy = schema.divvies.find(request.params.id);
+  //   return { divvy: { id: divvy.id, title: divvy.title}};
+  // });
+  // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
+  this.get('divvies');
+  this.get('divvies/:id');
+  this.post('divvies');
 
-  this.post('/divvies', (schema, request) => {
-    // don't want to override any existing ids, just dynamically add 1 to however many are in db already
-    let id = schema.divvies.all().models.length + 1;
-    return {
-      divvy: {id: id, title: JSON.parse(request.requestBody).divvy.title},
-    };
-  });
 
-  this.get('/divvies/:id', (schema, request) => {
-    console.log(request.params.id);
-    let divvy = schema.divvies.find(request.params.id);
-    return { divvy: { id: divvy.id, title: divvy.title}};
-  });
 
   /*
     Shorthand cheatsheet:
