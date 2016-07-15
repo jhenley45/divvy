@@ -2,10 +2,10 @@
   {{model.title}}
 </div>
 
-{{#if model.payments.length}}
+{{#if model.payments}}
   <div class="payments">
-    {{#each payments as |payments|}}
-      {{list-payment paymentBinding=payment delete="removePayment" edit="updatePayment"}}
+    {{#each model.payments as |payment|}}
+      {{list-payment payment=payment delete=removePayment edit=updatePayment}}
     {{/each}}
   </div>
 {{else}}

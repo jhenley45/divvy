@@ -1,0 +1,39 @@
+<div class="payment">
+  <div class="row">
+    <div class="col-md-10">
+      {{payment.description}}
+      <img src="http://cdn3.rd.io/user/no-user-image-square.jpg" class="profile-image">
+      <span style="margin-left: 20px;">
+        <!-- {{#if isEditing}}
+          You dropped
+          {{input type="text" class='transparent-input edit-payment-amount' value=payment.amount size="5"}}
+          on
+          {{input type="text" class='transparent-input edit-payment-description' value=payment.description size="20"}}
+          <button {{action "updatePayment"}} class="standard-button action-button">Update</button>
+        {{else}}
+          {{current-user-you payment.user session.currentUser}} dropped
+          <span class='payment-amount'>${{payment.amount}}</span> on
+          <span class='payment-description'>{{payment.description}}</span>
+        {{/if}} -->
+      </span>
+      <!-- {{#if confirmRemove}}
+        <div>
+          Are you sure you want to delete this payment?
+          <button {{action "removePayment" payment}} class="standard-button">Yes</button>
+          <button {{action "toggleConfirmRemovePayment"}} class="standard-button">No, cancel</button>
+        </div>
+      {{/if}} -->
+    </div>
+    <!-- {{#if payment.belongsToCurrentUser}}
+      {{#if showEditDelete}}
+        <div class="col-md-2 payment-buttons">
+          <i {{action "toggleConfirmRemovePayment"}} id="remove-payment" class="fa payment-icon fa-times"></i>
+          <i {{action "showEditPayment"}} id="edit-payment" class="fa payment-icon fa-edit"></i>
+        </div>
+      {{/if}}
+      {{#if payment.updatePaymentError}}
+        <div class="message-box error-message">Error: {{payment.updatePaymentError}}</div>
+      {{/if}}
+    {{/if}} -->
+  </div>
+</div>

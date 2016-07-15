@@ -17,14 +17,22 @@ export default function() {
   //   // return {divvies: models};
   //   return schema.divvies.all();
   // });
-  // this.get('/divvies/:id', (schema, request) => {
-  //   let divvy = schema.divvies.find(request.params.id);
-  //   return { divvy: { id: divvy.id, title: divvy.title}};
-  // });
+  this.get('/divvies/:id', (schema, request) => {
+    let divvy = schema.divvies.find(request.params.id);
+    let paymentIds = schema.payments.where({divvyId: divvy.id}).models.mapBy('id');
+    return {
+      divvy: {
+        id: divvy.id,
+        title: divvy.title,
+        payments: paymentIds
+      }
+    };
+  });
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
   this.get('divvies');
-  this.get('divvies/:id');
+  // this.get('divvies/:id');
   this.post('divvies');
+  this.get('payments/:id');
 
 
 

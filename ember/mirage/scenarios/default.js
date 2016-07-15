@@ -6,6 +6,11 @@ export default function(server) {
 
     Make sure to define a factory for each model you want to create.
   */
+  let divvyNumber = 10;
+  server.createList('divvy', divvyNumber);
 
-  server.createList('divvy', 10);
+  // create a payment for each divvy
+  for (let i = 1; i < divvyNumber + 1; i++) {
+    server.create('payment', { divvy: server.schema.divvies.find(i) })
+  }
 }
