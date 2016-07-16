@@ -10,6 +10,11 @@ export default Ember.Route.extend({
 				type: type
 			});
 			this.controllerFor('application').get('flashArray').pushObject(flashMessage);
+		},
+		invalidateSession () {
+			this.get('session').invalidate().then(() => {
+				this.send('flashMessage', 'Successfully logged out', 'notice');
+			});
 		}
 	}
 });

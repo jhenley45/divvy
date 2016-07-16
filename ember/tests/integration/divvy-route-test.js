@@ -36,7 +36,8 @@ test('Should display a message if there are no existing payments for a divvy', f
 
 test('Should display a list of payments for a divvy when there are payments', function(assert) {
   let divvy = server.create('divvy');
-  server.createList('payment', 3, { divvy });
+  let user = server.create('user', {username: "Test User 1", divvy: divvy});
+  server.createList('payment', 3, { divvy, user });
 
   visit('/divvies/' + divvy.id);
 
@@ -47,7 +48,6 @@ test('Should display a list of payments for a divvy when there are payments', fu
 
 test('Should be full width when there are no settlements', function(assert) {
   let divvy = server.create('divvy');
-  server.createList('payment', 3, { divvy });
 
   visit('/divvies/' + divvy.id);
 

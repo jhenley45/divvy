@@ -6,6 +6,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('sign_up');
+  this.route('sign_in');
   this.route('divvies', function() {
     this.route('new');
   });
