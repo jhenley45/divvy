@@ -11,6 +11,7 @@ export default function(server) {
 
   // create a payment for each divvy
   for (let i = 1; i < divvyNumber + 1; i++) {
-    server.create('payment', { divvy: server.schema.divvies.find(i) })
+    let user = server.create('user', { divvy: server.schema.divvies.find(i) });
+    server.create('payment', { divvy: server.schema.divvies.find(i), user: user });
   }
 }

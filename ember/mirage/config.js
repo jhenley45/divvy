@@ -20,19 +20,37 @@ export default function() {
   this.get('/divvies/:id', (schema, request) => {
     let divvy = schema.divvies.find(request.params.id);
     let paymentIds = schema.payments.where({divvyId: divvy.id}).models.mapBy('id');
+    let settlementIds = schema.settlements.where({divvyId: divvy.id}).models.mapBy('id');
+    let userIds = schema.users.where({divvyId: divvy.id}).models.mapBy('id');
     return {
       divvy: {
         id: divvy.id,
         title: divvy.title,
-        payments: paymentIds
+        payments: paymentIds,
+        settlements: settlementIds,
+        users: userIds
       }
     };
+  });
+  this.get('payments/:id', (schema, request) => {
+    let payment = schema.payments.find(request.params.id);
+    console.log(payment);
+    let user = schema.users.find(parseInt(payment.user.id));
+    return {
+      payment: {
+        id: payment.id,
+        amount: payment.amount,
+        user: user.id
+      }
+    }
   });
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
   this.get('divvies');
   // this.get('divvies/:id');
   this.post('divvies');
-  this.get('payments/:id');
+  // this.get('payments/:id');
+  this.get('settlements/:id');
+  this.get('users/:id');
 
 
 

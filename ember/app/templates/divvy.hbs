@@ -1,15 +1,63 @@
-<div id="divvy-title">
-  {{model.title}}
-</div>
+  <div class={{if model.settlements.length  "divvy-container" "divvy-container-full-width"}}>
+		<div class="divvy-heading border-top">
+			<div id="divvy-title">
+				{{model.title}}
+			</div>
 
-{{#if model.payments}}
-  <div class="payments">
-    {{#each model.payments as |payment|}}
-      {{list-payment payment=payment delete=removePayment edit=updatePayment}}
-    {{/each}}
-  </div>
-{{else}}
-  <div class="warning-block">
-    There are currently no payments for this divvy
-  </div>
-{{/if}}
+			<div class="row divvy-details full-width border-top no-margin">
+				<div class="divvy-members">
+					<span id="divvy-members-title" class="bold">Divvy members:</span>
+					<div class="divvy-member">
+						You
+					</div>
+					{{#each usersWithoutOrganizer as |user|}}
+						<div class="divvy-member">{{current-user-you user session.currentUser}}</div>
+					{{/each}}
+					</div>
+				<div class="pull-right inline-block">
+					<div class="form-group no-margin inline-block">
+						{{input type="text" class="form-control" id='add-user' value=addUser size="20" placeholder="Search for users"}}
+					</div>
+					<div {{action "addUserToTrip"}} class="outline-button action-button inline-block">Add user</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="divvy-content">
+			<!-- PAYMENTS -->
+			<div class="row">
+				<div class="col-md-12 payments-content">
+					<div class="new-payment-form">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="new-payment-text">
+									I spent $
+									{{input type="text" class='transparent-input' id='amount' value=amount size="5"}}
+									on
+									{{input type="text" class='transparent-input' id='description' value=description size="20"}}
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div {{action "addPaymentToTrip"}} class="standard-button action-button">Add payment</div>
+							</div>
+						</div>
+						{{#if formError}}
+							<div class="message-box error-message">Error: {{formError}}</div>
+						{{/if}}
+					</div>
+          {{#if model.payments}}
+            <div class="payments">
+              {{#each model.payments as |payment|}}
+                {{list-payment payment=payment delete=removePayment edit=updatePayment}}
+              {{/each}}
+            </div>
+          {{else}}
+            <div class="warning-block">
+              There are currently no payments for this divvy
+            </div>
+          {{/if}}
+				</div>
+			</div>
+		</div>
+	</div> <!-- end divvy container -->
