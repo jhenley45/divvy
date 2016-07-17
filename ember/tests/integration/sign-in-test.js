@@ -83,8 +83,9 @@ test('Should log the user in when the form is filled out', (assert) => {
   });
 });
 
-// test('Should display the username of the user in the nav bar header', function(assert) {
-//   signIn().then(function() {
-//     assert.equal(find('a.dropdown-toggle:contains("TestUser64")').length, 1);
-//   });
-// });
+test('Should display the username of the user in the nav bar header', function(assert) {
+  server.create('user', {username: "Steve Ripley"});
+  signIn().then(() => {
+    assert.equal(find('a.dropdown-toggle:contains("Steve Ripley")').length, 1);
+  });
+});

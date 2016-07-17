@@ -8,12 +8,12 @@ export default function() {
     Note: these only affect routes defined *after* them!
   */
 
-  this.post('/users/sign_in', (schema, request) => {
+  this.post('/users/sign_in', () => {
     return {
       "access_token" : "wahwahweewah",
       "user_id" : 1
-    }
-  })
+    };
+  });
 
   // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
   this.namespace = 'api';    // make this `api`, for example, if your API is namespaced

@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import { module, test } from 'qunit';
 
 export default function signIn() {
-  return new Ember.RSVP.Promise(function(resolve, reject) {
+  return new Ember.RSVP.Promise(function(resolve) {
     visit('/').then(function() {
       click(find('#sign-in')).then(function() {
         fillIn(find('input#email'), 'something@aol.com');

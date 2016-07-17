@@ -1,4 +1,4 @@
-import DS from 'ember-data';
+import Ember from 'ember';
 import Session from "ember-simple-auth/services/session";
 
 export default Session.extend({
