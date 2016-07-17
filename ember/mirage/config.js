@@ -1,3 +1,5 @@
+import Mirage from 'ember-cli-mirage';
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -8,7 +10,11 @@ export default function() {
     Note: these only affect routes defined *after* them!
   */
 
-  this.post('/users/sign_in', () => {
+  this.post('/users/sign_in', (schema, request) => {
+
+    if (request.requestBody.includes('faker')) {
+      return new Mirage.Response(404, {some: 'header'}, {error: "That email and password combination is incorrect. Please try again."});
+    }
     return {
       "access_token" : "wahwahweewah",
       "user_id" : 1
