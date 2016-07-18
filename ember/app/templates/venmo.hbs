@@ -1,0 +1,7 @@
+{{#if hasClickedConnect}}
+	Once you have authorized Venmo, click here to login
+	<button {{action "attemptLogin"}}>Login</button>
+{{else}}
+	{{venmoFailMessage}}
+	<button {{action "connectToVenmo"}}>Connect to Venmo</button>
+{{/if}}

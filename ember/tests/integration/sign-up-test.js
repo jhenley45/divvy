@@ -71,7 +71,7 @@ test('Should show an error message when the user submits an empty form', (assert
 
 test('Should show an error message when the user submits an invalid email address', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something').then(() => {
+    fillIn(find('input#email'), 'newuser').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
         assert.equal(find('p:contains("You must provide a valid email address")').length, 1);
       });
@@ -91,7 +91,7 @@ test('Should show an error message when the user submits an invalid email addres
 
 test('Should show an error message when the user submits an invalid email address', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@else.').then(() => {
+    fillIn(find('input#email'), 'newuser@else.').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
         assert.equal(find('p:contains("You must provide a valid email address")').length, 1);
       });
@@ -101,9 +101,9 @@ test('Should show an error message when the user submits an invalid email addres
 
 test('Should clear the error if the user corrects an invalid email address', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@else.').then(() => {
+    fillIn(find('input#email'), 'newuser@else.').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
-        fillIn(find('input#email'), 'something@else.com').then(() => {
+        fillIn(find('input#email'), 'newuser@else.com').then(() => {
           click(find('button:contains(' + createAccountText + ')')).then(() => {
             assert.equal(find('p:contains("You must provide a valid email address")').length, 0);
           });
@@ -117,7 +117,7 @@ test('Should clear the error if the user corrects an empty email address', (asse
   click(find('#sign-up')).then(() => {
     fillIn(find('input#email'), '').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
-        fillIn(find('input#email'), 'something@else.com').then(() => {
+        fillIn(find('input#email'), 'newuser@else.com').then(() => {
           click(find('button:contains(' + createAccountText + ')')).then(() => {
             assert.equal(find('p:contains("You must provide an email address")').length, 0);
           });
@@ -129,7 +129,7 @@ test('Should clear the error if the user corrects an empty email address', (asse
 
 test('Should show an error message when the user submits an empty password field', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@else.com');
+    fillIn(find('input#email'), 'newuser@else.com');
     click(find('button:contains(' + createAccountText + ')')).then(() => {
       assert.equal(find('p:contains("You must provide a password")').length, 1);
     });
@@ -138,7 +138,7 @@ test('Should show an error message when the user submits an empty password field
 
 test('Should clear the error if the user corrects an empty password', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@aol.com').then(() => {
+    fillIn(find('input#email'), 'newuser@aol.com').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
         fillIn(find('input#password'), 'mypassword').then(() => {
           click(find('button:contains(' + createAccountText + ')')).then(() => {
@@ -152,7 +152,7 @@ test('Should clear the error if the user corrects an empty password', (assert) =
 
 test('Should show an error message when the user submits an empty password confirmation field', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@else.com');
+    fillIn(find('input#email'), 'newuser@else.com');
     fillIn(find('input#password'), 'mycoolpass');
     click(find('button:contains(' + createAccountText + ')')).then(() => {
       assert.equal(find('p:contains("You must provide a confirmation password")').length, 1);
@@ -162,7 +162,7 @@ test('Should show an error message when the user submits an empty password confi
 
 test('Should clear the error if the user corrects an empty password confirmation', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@aol.com');
+    fillIn(find('input#email'), 'newuser@aol.com');
     fillIn(find('input#password'), 'mycoolpass').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
         fillIn(find('input#repeat-password'), 'mypassword').then(() => {
@@ -177,7 +177,7 @@ test('Should clear the error if the user corrects an empty password confirmation
 
 test('Should show an error message when the user submits a passwords that do not match', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@else.com');
+    fillIn(find('input#email'), 'newuser@else.com');
     fillIn(find('input#password'), 'mycoolpass1');
     fillIn(find('input#repeat-password'), 'mycoolpass2');
     click(find('button:contains(' + createAccountText + ')')).then(() => {
@@ -188,7 +188,7 @@ test('Should show an error message when the user submits a passwords that do not
 
 test('Should clear the error if the user corrects an incorrect password error', (assert) => {
   click(find('#sign-up')).then(() => {
-    fillIn(find('input#email'), 'something@aol.com');
+    fillIn(find('input#email'), 'newuser@aol.com');
     fillIn(find('input#password'), 'mycoolpass');
     fillIn(find('input#repeat-password'), 'mycoolpass2').then(() => {
       click(find('button:contains(' + createAccountText + ')')).then(() => {
@@ -202,13 +202,13 @@ test('Should clear the error if the user corrects an incorrect password error', 
   });
 });
 
-// test('Should show a button to connect to venmo when all forms are correctly filled out', (assert) => {
-//   click(find('#sign-up')).then(() => {
-//     fillIn(find('input#email'), 'something@else.com');
-//     fillIn(find('input#password'), 'mycoolpass1');
-//     fillIn(find('input#repeat-password'), 'mycoolpass1');
-//     click(find('button:contains(' + createAccountText + ')')).then(() => {
-//       assert.equal(find('button:contains("Connect to Venmo")').length, 1);
-//     });
-//   });
-// });
+test('Should show a button to connect to venmo when all forms are correctly filled out', (assert) => {
+  click(find('#sign-up')).then(() => {
+    fillIn(find('input#email'), 'newuser@else.com');
+    fillIn(find('input#password'), 'mycoolpass1');
+    fillIn(find('input#repeat-password'), 'mycoolpass1');
+    click(find('button:contains(' + createAccountText + ')')).then(() => {
+      assert.equal(find('button:contains("Connect to Venmo")').length, 1);
+    });
+  });
+});

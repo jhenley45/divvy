@@ -11,13 +11,19 @@ export default function() {
   */
 
   this.post('/users/sign_in', (schema, request) => {
-
+    console.log(request)
+    let id = 1;
+    let auth = true;
     if (request.requestBody.includes('faker')) {
       return new Mirage.Response(404, {some: 'header'}, {error: "That email and password combination is incorrect. Please try again."});
+    } else if (request.requestBody.includes('newuser')) {
+      id = 2; // will be an unauthorized user
+      auth = false;
     }
     return {
       "accessToken" : "wahwahweewah",
-      "userId" : 1
+      "userId" : id,
+      "isVenmoAuthorized" : auth
     };
   });
 
@@ -64,11 +70,25 @@ export default function() {
       }
     };
   });
+  this.get('users/:id', (schema, request) => {
+    let user = schema.users.find(request.params.id);
+    let auth = false;
+    if (user.id == 1) {
+      auth = true;
+    }
+    return {
+      user: {
+        id: user.id,
+        username: user.username,
+        isVenmoAuthorized: auth
+      }
+    };
+  });
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
   this.get('divvies');
   this.post('divvies');
   this.get('settlements/:id');
-  this.get('users/:id');
+
 
   this.post('/users', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));

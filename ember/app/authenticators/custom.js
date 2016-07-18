@@ -28,7 +28,7 @@ var CustomAuthenticator = Base.extend({
           resolve({
             token: response['accessToken'],
             userId: response['userId'],
-            // isVenmoAuthorized: response['isVenmoAuthorized']
+            isVenmoAuthorized: response['isVenmoAuthorized']
           });
         }
       }, function(xhr, status, error) {

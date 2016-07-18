@@ -40,11 +40,12 @@ export default Ember.Component.extend({
           Ember.run(() => {
             if (response.user) {
               // LOG THAT MOFO IN
-              var credentials = { "email" : this.get('email'), "password" : this.get('password') };
+              let email = this.get('email');
+              let password = this.get('password');
 
-              this.get('session').authenticate('authenticator:custom', credentials).then(() => {
+              this.get('session').authenticate('authenticator:custom', email, password).then(() => {
                 this.sendAction();
-              }, function(message) {
+              }, (message) => {
                 this.set('errorMessage', message);
               });
             } else if (response.error) {
