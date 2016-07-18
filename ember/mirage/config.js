@@ -11,7 +11,6 @@ export default function() {
   */
 
   this.post('/users/sign_in', (schema, request) => {
-    console.log(request)
     let id = 1;
     let auth = true;
     if (request.requestBody.includes('faker')) {
@@ -73,7 +72,7 @@ export default function() {
   this.get('users/:id', (schema, request) => {
     let user = schema.users.find(request.params.id);
     let auth = false;
-    if (user.id == 1) {
+    if (user.id === '1') {
       auth = true;
     }
     return {

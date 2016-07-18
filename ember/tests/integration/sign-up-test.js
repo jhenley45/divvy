@@ -187,6 +187,7 @@ test('Should show an error message when the user submits a passwords that do not
 });
 
 test('Should clear the error if the user corrects an incorrect password error', (assert) => {
+  server.create('user'); // create user so next user gets id = 2 for tests
   click(find('#sign-up')).then(() => {
     fillIn(find('input#email'), 'newuser@aol.com');
     fillIn(find('input#password'), 'mycoolpass');
@@ -203,6 +204,7 @@ test('Should clear the error if the user corrects an incorrect password error', 
 });
 
 test('Should show a button to connect to venmo when all forms are correctly filled out', (assert) => {
+  server.create('user'); // create user so next user gets id = 2 for tests
   click(find('#sign-up')).then(() => {
     fillIn(find('input#email'), 'newuser@else.com');
     fillIn(find('input#password'), 'mycoolpass1');
