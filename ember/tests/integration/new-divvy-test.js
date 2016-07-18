@@ -1,14 +1,17 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
+import signIn from '../helpers/sign-in';
 
 var App;
 
-module('Integration - New Trip Page', {
+module('Integration - New Divvy Page', {
   beforeEach: function() {
     App = startApp();
     server.createList('divvy', 3);
-    visit('/divvies/new');
+    signIn().then(() => {
+      visit('/divvies/new');
+    });
   },
   afterEach: function() {
     Ember.run(App, 'destroy');

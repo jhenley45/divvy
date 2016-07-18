@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
+import signIn from '../helpers/sign-in';
 
 var App;
 
@@ -8,7 +9,7 @@ module('Integration - Index Page', {
   beforeEach: function() {
     App = startApp();
     server.createList('divvy', 3);
-    visit('/');
+    signIn();
   },
   afterEach: function() {
     Ember.run(App, 'destroy');

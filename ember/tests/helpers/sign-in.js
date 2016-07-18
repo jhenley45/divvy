@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default function signIn() {
+  server.create('user');
   return new Ember.RSVP.Promise(function(resolve) {
     visit('/').then(function() {
       click(find('#sign-in')).then(function() {

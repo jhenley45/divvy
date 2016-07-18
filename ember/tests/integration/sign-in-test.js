@@ -3,6 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import signIn from '../helpers/sign-in';
 
+
 var App;
 
 module('Integration - Sign in', {
