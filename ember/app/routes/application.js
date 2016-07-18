@@ -16,6 +16,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 			this.get('session').invalidate().then(() => {
 				this.send('flashMessage', 'Successfully logged out', 'notice');
 			});
+		},
+		transitionToIndex() {
+			this.transitionTo('index');
 		}
 	}
 });

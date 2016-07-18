@@ -1,0 +1,29 @@
+<div class='col-md-6'>
+	<div class="form-group">
+		Email Address {{input type="text" class="form-control" id="email" value=email size="30"}}
+	</div>
+	{{#if emailError}}
+		<p class="error-message">{{emailError}}</p>
+	{{/if}}
+
+	<div class="form-group">
+		Password {{input type="password" class="form-control" id="password" value=password size="30"}}
+	</div>
+	{{#if passwordError}}
+		<p class="error-message">{{passwordError}}</p>
+	{{/if}}
+
+	<div class="form-group">
+		Repeat Password {{input type="password" class="form-control" id="repeat-password" value=passwordConfirmation size="30"}}
+	</div>
+	{{#if passwordConfirmationError}}
+		<p class="error-message">{{passwordConfirmationError}}</p>
+	{{/if}}
+
+	<button {{action "createUser"}}>Create Account</button>
+
+	{{#if formError}}
+		<p class="error-message">Error: {{formError}}</p>
+	{{/if}}
+
+</div>

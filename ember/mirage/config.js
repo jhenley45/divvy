@@ -66,11 +66,14 @@ export default function() {
   });
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
   this.get('divvies');
-  // this.get('divvies/:id');
   this.post('divvies');
-  // this.get('payments/:id');
   this.get('settlements/:id');
   this.get('users/:id');
+
+  this.post('/users', (schema, request) => {
+    var params = JSON.parse(JSON.stringify(request.requestBody));
+    return schema.users.create(params);
+  });
 
 
 

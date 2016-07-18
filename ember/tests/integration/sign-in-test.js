@@ -101,11 +101,11 @@ test('Should redirect the user to the index route after they log in', (assert) =
 test('Should display an error if the email is not registered', (assert) => {
   // server.get('/users', {errors: ['there was an error']}, 404);
   server.create('user', {username: "Steve Ripley"});
-  visit('/').then(function() {
-    click(find('#sign-in')).then(function() {
+  visit('/').then(() => {
+    click(find('#sign-in')).then(() => {
       fillIn(find('input#email'), 'faker@aol.com');
-      fillIn(find('input#password'), 'mycoolpass1').then(function() {
-        click(find('button:contains("Login")')).then(function() {
+      fillIn(find('input#password'), 'mycoolpass1').then(() => {
+        click(find('button:contains("Login")')).then(() => {
           assert.equal(find('.error-message:contains("That email and password combination is incorrect")').length, 1);
         });
       });
