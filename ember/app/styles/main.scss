@@ -1,0 +1,134 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	background-color: #EFF0F1;
+}
+
+.inline {
+	display: inline-block;
+}
+
+.container-fluid {
+	padding: 0px;
+	margin-top: 50px;
+}
+
+.profile-image {
+	border-radius: 50%;
+	border: none;
+	height: 35px;
+	width: 35px;
+}
+
+.transparent-input {
+	background: transparent;
+	border: none;
+	outline: none;
+	border-bottom: 1px dashed #ffaa91;
+	margin: 0px 5px;
+	color: #f23818;
+}
+
+.section-title {
+	padding: 20px;
+	text-align: center;
+	font-size: 30px;
+}
+
+/** BUTTONS **/
+.standard-button {
+	padding: 10px;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	font-size: 16px;
+}
+
+.standard-button-flat {
+	@extend .standard-button;
+	border-radius: 0px;
+}
+
+.standard-button:hover {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.primary-button {
+	@extend .standard-button;
+	background-color: $primary-green;
+}
+
+.action-button {
+	background-color: $secondary-blue;
+}
+
+.action-button:hover {
+	color: $action-color-hover;
+}
+
+.outline-button {
+	cursor: pointer;
+	background: #fff;
+	border-color: $secondary-blue;
+	color: $secondary-blue;
+	fill: $secondary-blue;
+	border: 1px solid;
+	border-radius: 3px;
+	height: 35px;
+	line-height: 35px;
+	padding: 0px 10px;
+	transition: background 0.5s;
+}
+
+.outline-button:hover {
+	background: $secondary-blue;
+	color: #fff;
+}
+
+
+/** NOTIFICATIONS **/
+.message-box {
+	margin: 10px 0px;
+	padding:15px 20px;
+	border-radius: 10px;
+}
+
+.error-message {
+	background-color: #FFBABA;
+	color: #D8000C;
+}
+
+
+/** CENTERING **/
+.center-div-80 {
+	width: 80%;
+	margin: 0 auto;
+}
+
+
+
+
+/** FUNCTIONAL CLASSES **/
+.border-bottom {
+	border-top: 1px solid #EFF0F1;
+}
+
+.border-top {
+	border-top: 1px solid #EFF0F1;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.no-margin {
+	margin: 0px;
+}

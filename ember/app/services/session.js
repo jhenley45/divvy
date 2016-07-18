@@ -7,7 +7,7 @@ export default Session.extend({
 
   currentUser: Ember.computed('isAuthenticated', function() {
     if (this.get('isAuthenticated')) {
-      let userId = this.get('data.authenticated.user_id');
+      let userId = this.get('data.authenticated.userId');
       return this.get('store').findRecord('user', userId);
     }
   })

@@ -11,13 +11,14 @@ export default function() {
   */
 
   this.post('/users/sign_in', (schema, request) => {
+    console.log(request);
 
     if (request.requestBody.includes('faker')) {
       return new Mirage.Response(404, {some: 'header'}, {error: "That email and password combination is incorrect. Please try again."});
     }
     return {
-      "access_token" : "wahwahweewah",
-      "user_id" : 1
+      "accessToken" : "wahwahweewah",
+      "userId" : 1
     };
   });
 

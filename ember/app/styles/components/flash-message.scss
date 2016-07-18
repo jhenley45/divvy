@@ -1,0 +1,24 @@
+.flash-message {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  z-index: 1000;
+  text-align: center;
+}
+
+.flash-warning {
+  @extend .flash-message;
+  background-color: red;
+}
+
+.flash-success {
+  @extend .flash-message;
+  background-color: green;
+}
+
+.flash-notice {
+  @extend .flash-message;
+  background-color: blue;
+}

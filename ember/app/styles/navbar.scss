@@ -1,0 +1,29 @@
+.navbar {
+    margin-bottom: 0;
+    color: white;
+    border: none;
+    border-radius: 0px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.navbar-default {
+    background-color: $main-nav;
+}
+
+.navbar-default .navbar-brand {
+    color: $main-font;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #e1ebed;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: $main-font;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #e1ebed;
+}
