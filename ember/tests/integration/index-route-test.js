@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import signIn from '../helpers/sign-in';
+// import { invalidateSession } from 'divvy/tests/helpers/ember-simple-auth';
 
 var App;
 
@@ -15,6 +16,15 @@ module('Integration - Index Page', {
     Ember.run(App, 'destroy');
   }
 });
+
+// test('Should not be able to access the index page when not signed in', (assert) => {
+//   invalidateSession(App);
+//   visit('/');
+//
+//   andThen(() => {
+//     assert.equal(find('h2:contains("Sign In")').length, 1);
+//   });
+// });
 
 test('Should have a title of "All Divvies"', function(assert) {
   assert.equal(find('h3').text(), 'All Divvies');

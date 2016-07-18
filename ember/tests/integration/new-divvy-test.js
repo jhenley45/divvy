@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import signIn from '../helpers/sign-in';
+// import { invalidateSession } from 'divvy/tests/helpers/ember-simple-auth';
 
 var App;
 
@@ -17,6 +18,15 @@ module('Integration - New Divvy Page', {
     Ember.run(App, 'destroy');
   }
 });
+
+// test('Should not be able to access the new divvy page when not signed in', (assert) => {
+//   invalidateSession(App);
+//   visit('/divvies/new');
+//
+//   andThen(() => {
+//     assert.equal(currentRouteName(), 'sign_in');
+//   });
+// });
 
 test('Should have a title of "Create new divvy"', function(assert) {
   assert.equal(find('h3:contains("Create new divvy")').length, 1);

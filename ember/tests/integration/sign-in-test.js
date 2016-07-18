@@ -112,3 +112,12 @@ test('Should display an error if the email is not registered', (assert) => {
     });
   });
 });
+
+test('Should not allow the user to visit the sign in route when they are logged in', (assert) => {
+  signIn();
+  visit('sign_in');
+
+  andThen(() => {
+    assert.equal(currentRouteName(), 'index');
+  });
+});

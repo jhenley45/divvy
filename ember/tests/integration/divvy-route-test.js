@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import signIn from '../helpers/sign-in';
+import { invalidateSession } from 'divvy/tests/helpers/ember-simple-auth';
 
 var App;
 
@@ -13,6 +14,16 @@ module('Integration - Divvy Page', {
   afterEach: function() {
     Ember.run(App, 'destroy');
   }
+});
+
+test('Should not be able to access the divvy page when not signed in', (assert) => {
+  let divvy = server.create('divvy', {title: 'Sunset over Hyrule'});
+  invalidateSession(App);
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(currentRouteName(), 'sign_in');
+  });
 });
 
 test('Should show the divvy\'s title on the divvy route', (assert) => {
