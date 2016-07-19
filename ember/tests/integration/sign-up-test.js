@@ -214,3 +214,15 @@ test('Should show a button to connect to venmo when all forms are correctly fill
     });
   });
 });
+
+test('Should display an error message if the backend errors out', (assert) => {
+  server.create('user'); // create user so next user gets id = 2 for tests
+  click(find('#sign-up')).then(() => {
+    fillIn(find('input#email'), 'error@else.com');
+    fillIn(find('input#password'), 'mycoolpass1');
+    fillIn(find('input#repeat-password'), 'mycoolpass1');
+    click(find('button:contains(' + createAccountText + ')')).then(() => {
+      assert.equal(find('p:contains("Something you did caused something to break. Thanks a lot. Try again later.")').length, 1);
+    });
+  });
+});

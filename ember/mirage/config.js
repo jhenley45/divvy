@@ -91,6 +91,9 @@ export default function() {
 
   this.post('/users', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));
+    if (request.requestBody.includes('error')) {
+      return new Mirage.Response(500, {some: 'header'}, {error: "Something you did caused something to break. Thanks a lot. Try again later."});
+    }
     return schema.users.create(params);
   });
 

@@ -52,8 +52,10 @@ export default Ember.Component.extend({
               this.set('formError', response.error);
             }
           });
-        }, function() {
-          // handle error
+        }, (response) => {
+          Ember.run(() => {
+            this.set('formError', response.responseJSON.error);
+          });
         });
       }
     }
