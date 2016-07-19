@@ -78,3 +78,11 @@ test('Should show an error if something went wrong', (assert) => {
     assert.equal(find('div.error-message:contains("Something went wrong, please try again later.")').length, 1);
   });
 });
+
+test('Should not add the new payment when there is a backend 500 error', (assert) => {
+  fillIn(find('input#description'), 'Test error');
+  fillIn(find('input#amount'), '230');
+  click(find('.action-button:contains("Add payment")')).then(() => {
+    assert.equal(find('div.payment').length, 3);
+  });
+});

@@ -34,6 +34,7 @@ export default Ember.Component.extend({
           this.set('amount', undefined);
           this.sendAction('flash', 'New payment successfully created', 'success');
         }, () => {
+          payment.deleteRecord();
           this.set('formError', "Something went wrong, please try again later.");
         });
       }
