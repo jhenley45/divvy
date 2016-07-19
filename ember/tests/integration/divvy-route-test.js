@@ -92,3 +92,16 @@ test('Should display the username of the payment owner when it is not the curren
     assert.equal(find('div.payment:contains("Test User 1")').length, 2);
   });
 });
+
+test('Should display "You" as the payment owner when it is the current user', function(assert) {
+  let divvy = server.create('divvy');
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('div.payment:contains("You")').length, 2);
+  });
+});

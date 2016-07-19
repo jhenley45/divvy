@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.ListPaymentComponent = Ember.Component.extend({
+  session: Ember.inject.service(),
 
   // mouseEnter : function() {
   //   this.set('showEditDelete', true);

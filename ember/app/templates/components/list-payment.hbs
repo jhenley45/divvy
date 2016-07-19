@@ -10,7 +10,7 @@
           {{input type="text" class='transparent-input edit-payment-description' value=payment.description size="20"}}
           <button {{action "updatePayment"}} class="standard-button action-button">Update</button>
         {{else}}
-          {{#if (eq payment.user session.currentUser) }}
+          {{#if (eq payment.user.id session.currentUser.id) }}
             You
           {{else}}
             {{payment.user.username}}
