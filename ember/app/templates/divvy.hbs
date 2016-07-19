@@ -28,24 +28,9 @@
 			<!-- PAYMENTS -->
 			<div class="row">
 				<div class="col-md-12 payments-content">
-					<div class="new-payment-form">
-						<div class="row">
-							<div class="col-md-8">
-								<div class="new-payment-text">
-									I spent $
-									{{input type="text" class='transparent-input' id='amount' value=amount size="5"}}
-									on
-									{{input type="text" class='transparent-input' id='description' value=description size="20"}}
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div {{action "addPaymentToTrip"}} class="standard-button action-button">Add payment</div>
-							</div>
-						</div>
-						{{#if formError}}
-							<div class="message-box error-message">Error: {{formError}}</div>
-						{{/if}}
-					</div>
+
+					{{new-payment-form divvy=model}}
+
           {{#if model.payments}}
             <div class="payments">
               {{#each model.payments as |payment|}}

@@ -88,6 +88,10 @@ export default function() {
   this.post('divvies');
   this.get('settlements/:id');
 
+  this.post('payments', (schema, request) => {
+    var params = JSON.parse(JSON.stringify(request.requestBody));
+    return schema.payments.create(params);
+  });
 
   this.post('/users', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));
