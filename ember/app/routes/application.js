@@ -6,7 +6,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
 	actions : {
 		flashMessage (message, type) {
-			console.log("HIT ME")
 			var flashMessage = flashObject.create({
 				message: message,
 				type: type

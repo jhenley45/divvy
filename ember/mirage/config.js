@@ -54,7 +54,8 @@ export default function() {
         title: divvy.title,
         payments: paymentIds,
         settlements: settlementIds,
-        users: userIds
+        users: userIds,
+        organizerId: schema.users.first().id
       }
     };
   });

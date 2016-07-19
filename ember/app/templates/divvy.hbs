@@ -10,8 +10,8 @@
 					<div class="divvy-member">
 						You
 					</div>
-					{{#each usersWithoutOrganizer as |user|}}
-						<div class="divvy-member">{{current-user-you user session.currentUser}}</div>
+					{{#each model.usersWithoutOrganizer as |user|}}
+						<div class="divvy-member">{{user.username}}</div>
 					{{/each}}
 					</div>
 				<div class="pull-right inline-block">

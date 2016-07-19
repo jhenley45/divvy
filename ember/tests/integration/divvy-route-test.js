@@ -105,3 +105,61 @@ test('Should display "You" as the payment owner when it is the current user', fu
     assert.equal(find('div.payment:contains("You")').length, 2);
   });
 });
+
+
+
+// TRIP USERS
+test('Should have a section with the title "Divvy members"', function(assert) {
+  let divvy = server.create('divvy');
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('#divvy-members-title:contains("Divvy members")').length, 1);
+  });
+});
+
+test('Should list the members of the divvy', function(assert) {
+  let divvy = server.create('divvy');
+  let users = server.createList('user', 3, {divvy})
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('div.divvy-member').length, 4); // includes "You"
+  });
+});
+
+test('Should display "You" instead of the username when currentUser is organizer', function(assert) {
+  let divvy = server.create('divvy');
+  let users = server.createList('user', 3, {divvy})
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('div.divvy-member:contains("You")').length, 1);
+  });
+});
+
+test('Should have a button to allow you to add a user to a trip', function(assert) {
+  let divvy = server.create('divvy');
+  let users = server.createList('user', 3, {divvy})
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('div.action-button:contains("Add user")').length, 1);
+  });
+});
