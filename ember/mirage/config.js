@@ -88,6 +88,7 @@ export default function() {
   this.get('divvies');
   this.post('divvies');
   this.get('settlements/:id');
+  this.delete('payments/:id');
 
   this.post('payments', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));

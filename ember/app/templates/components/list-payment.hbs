@@ -20,24 +20,22 @@
           <span class='payment-description'>{{payment.description}}</span>
         {{/if}}
       </span>
-      <!-- {{#if confirmRemove}}
+      {{#if confirmRemove}}
         <div>
           Are you sure you want to delete this payment?
-          <button {{action "removePayment" payment}} class="standard-button">Yes</button>
+          <button {{action "removePayment"}} class="standard-button">Yes</button>
           <button {{action "toggleConfirmRemovePayment"}} class="standard-button">No, cancel</button>
         </div>
-      {{/if}} -->
-    </div>
-    <!-- {{#if payment.belongsToCurrentUser}}
-      {{#if showEditDelete}}
-        <div class="col-md-2 payment-buttons">
-          <i {{action "toggleConfirmRemovePayment"}} id="remove-payment" class="fa payment-icon fa-times"></i>
-          <i {{action "showEditPayment"}} id="edit-payment" class="fa payment-icon fa-edit"></i>
-        </div>
       {{/if}}
+    </div>
+    {{#if (eq payment.user.id session.currentUser.id)}}
+      <div class="col-md-2 payment-buttons">
+        <i {{action "toggleConfirmRemovePayment"}} id="remove-payment" class="fa payment-icon fa-times"></i>
+        <i {{action "showEditPayment"}} id="edit-payment" class="fa payment-icon fa-edit"></i>
+      </div>
       {{#if payment.updatePaymentError}}
         <div class="message-box error-message">Error: {{payment.updatePaymentError}}</div>
       {{/if}}
-    {{/if}} -->
+    {{/if}}
   </div>
 </div>

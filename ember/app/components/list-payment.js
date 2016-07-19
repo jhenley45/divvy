@@ -3,27 +3,25 @@ import Ember from "ember";
 export default Ember.ListPaymentComponent = Ember.Component.extend({
   session: Ember.inject.service(),
 
-  // mouseEnter : function() {
-  //   this.set('showEditDelete', true);
-  // },
-  //
-  // mouseLeave : function() {
-  //   this.set('showEditDelete', false);
-  // },
-  // actions : {
-  //   toggleConfirmRemovePayment : function() {
-  //     this.set('confirmRemove', !this.get('confirmRemove'));
-  //   },
-  //   showEditPayment : function() {
-  //     this.set('isEditing', !this.get('isEditing'));
-  //   },
-  //   removePayment: function() {
-  //     this.sendAction("delete", this.get('payment').get('content'));
-  //   },
-  //   updatePayment: function() {
-  //     this.sendAction("edit");
-  //     this.set('isEditing', false);
-  //   }
-  // }
+  actions : {
+    toggleConfirmRemovePayment () {
+      this.set('confirmRemove', !this.get('confirmRemove'));
+    },
+    showEditPayment () {
+      this.set('isEditing', !this.get('isEditing'));
+    },
+    removePayment () {
+      let payment = this.get('payment');
+      payment.destroyRecord().then(() => {
+        this.sendAction('flashMessage', 'Payment successfully deleted', 'success');
+      }, function() {
+        this.sendAction('flashMessage', 'An error occurred while processing your request', 'warning');
+      });
+    },
+    updatePayment () {
+      this.sendAction("edit");
+      this.set('isEditing', false);
+    }
+  }
 
 });
