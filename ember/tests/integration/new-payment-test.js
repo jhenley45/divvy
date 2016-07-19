@@ -70,3 +70,11 @@ test('Should clear the new payment form after payment has been added.', (assert)
     assert.equal(find('input#description').text(), '');
   });
 });
+
+test('Should show an error if something went wrong', (assert) => {
+  fillIn(find('input#description'), 'Test error');
+  fillIn(find('input#amount'), '230');
+  click(find('.action-button:contains("Add payment")')).then(() => {
+    assert.equal(find('div.error-message:contains("Something went wrong, please try again later.")').length, 1);
+  });
+});

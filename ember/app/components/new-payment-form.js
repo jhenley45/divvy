@@ -1,4 +1,5 @@
 import Ember from "ember";
+let $ = Ember.$;
 
 export default Ember.Component.extend({
 
@@ -31,10 +32,9 @@ export default Ember.Component.extend({
         payment.save().then(() => {
           this.set('description', undefined);
           this.set('amount', undefined);
-          //this.send('flashMessage', 'New payment successfully created', 'success');
-        }, function() {
-          // need to destroy payment object
-          //this.send('flashMessage', 'An error occurred while processing your request', 'warning');
+          this.sendAction('flash', 'New payment successfully created', 'success');
+        }, () => {
+          this.set('formError', "Something went wrong, please try again later.");
         });
       }
     }

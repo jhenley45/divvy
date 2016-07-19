@@ -90,6 +90,10 @@ export default function() {
 
   this.post('payments', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));
+
+    if (request.requestBody.includes('error')) {
+      return new Mirage.Response(500, {some: 'header'}, {error: "Something went wrong, please try again later."});
+    }
     return schema.payments.create(params);
   });
 
