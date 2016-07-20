@@ -64,25 +64,34 @@ test('Should delete the payment when the user clicks to confirm the deletion', f
   });
 });
 
-// test('Should display a cancel delete button when user clicks to delete payment', function(assert) {
-//   triggerEvent(".payment:contains('You dropped')", "mouseenter").then(function() {
-//     click(find('i#remove-payment')).then(function() {
-//       assert.equal(find('button:contains("No, cancel")').length, 1);
-//     });
-//   });
-// });
-//
-// test('Should hide the delete payment option when the user clicks to cancel the deletion', function(assert) {
-//   triggerEvent(".payment:contains('You dropped')", "mouseenter").then(function() {
-//     click(find('i#remove-payment')).then(function() {
-//       click(find('button:contains("No, cancel")')).then(function() {
-//         assert.equal(find('button:contains("No, cancel")').length, 0);
-//       });
-//     });
-//   });
-//   click(find('i#remove-payment')).then(function() {
-//     click(find('button:contains("No, cancel")')).then(function() {
-//       assert.equal(find('button:contains("No, cancel")').length, 0);
-//     });
-//   });
-// });
+test('Should display a cancel delete button when user clicks to delete payment', (assert) => {
+  let divvy = server.create('divvy');
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+  andThen(() => {
+    triggerEvent(".payment:contains('You')", "mouseenter").then(() => {
+      click(find('i#remove-payment')).then(() => {
+        assert.equal(find('button:contains("No, cancel")').length, 1);
+      });
+    });
+  });
+});
+
+test('Should hide the delete payment option when the user clicks to cancel the deletion', function(assert) {
+  let divvy = server.create('divvy');
+  let user = server.schema.users.find(1);
+  server.create('payment', { divvy, user });
+
+  visit('/divvies/' + divvy.id);
+  andThen(() => {
+    triggerEvent(".payment:contains('You')", "mouseenter").then(() => {
+      click(find('i#remove-payment')).then(() => {
+        click(find('button:contains("No, cancel")')).then(() => {
+          assert.equal(find('button:contains("No, cancel")').length, 0);
+        });
+      });
+    });
+  });
+});
