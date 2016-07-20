@@ -33,8 +33,8 @@
         <i {{action "toggleConfirmRemovePayment"}} id="remove-payment" class="fa payment-icon fa-times"></i>
         <i {{action "showEditPayment"}} id="edit-payment" class="fa payment-icon fa-edit"></i>
       </div>
-      {{#if payment.updatePaymentError}}
-        <div class="message-box error-message">Error: {{payment.updatePaymentError}}</div>
+      {{#if updatePaymentError}}
+        <div class="message-box error-message">Error: {{updatePaymentError}}</div>
       {{/if}}
     {{/if}}
   </div>

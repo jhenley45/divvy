@@ -90,6 +90,10 @@ export default function() {
   this.get('settlements/:id');
   this.delete('payments/:id');
 
+  this.put('payments/:id', (request) => {
+    console.log(request); // for some reason there is an error unless this is done in long form. 
+  });
+
   this.post('payments', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));
 

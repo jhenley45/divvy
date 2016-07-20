@@ -34,7 +34,7 @@
           {{#if model.payments}}
             <div class="payments">
               {{#each model.payments as |payment|}}
-                {{list-payment payment=payment delete=removePayment edit=updatePayment flashMessage='flashMessage'}}
+                {{list-payment payment=payment flashMessage='flashMessage'}}
               {{/each}}
             </div>
           {{else}}
