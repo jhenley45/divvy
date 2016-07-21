@@ -124,7 +124,7 @@ test('Should have a section with the title "Divvy members"', function(assert) {
 
 test('Should list the members of the divvy', function(assert) {
   let divvy = server.create('divvy');
-  let users = server.createList('user', 3, {divvy})
+  server.createList('user', 3, {divvy});
   let user = server.schema.users.find(1);
   server.create('payment', { divvy, user });
   server.create('payment', { divvy, user });
@@ -138,7 +138,7 @@ test('Should list the members of the divvy', function(assert) {
 
 test('Should display "You" instead of the username when currentUser is organizer', function(assert) {
   let divvy = server.create('divvy');
-  let users = server.createList('user', 3, {divvy})
+  server.createList('user', 3, {divvy});
   let user = server.schema.users.find(1);
   server.create('payment', { divvy, user });
   server.create('payment', { divvy, user });
@@ -152,7 +152,7 @@ test('Should display "You" instead of the username when currentUser is organizer
 
 test('Should have a button to allow you to add a user to a trip', function(assert) {
   let divvy = server.create('divvy');
-  let users = server.createList('user', 3, {divvy})
+  server.createList('user', 3, {divvy});
   let user = server.schema.users.find(1);
   server.create('payment', { divvy, user });
   server.create('payment', { divvy, user });

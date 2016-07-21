@@ -1,4 +1,5 @@
 import Ember from "ember";
+let $ = Ember.$;
 
 export default Ember.ListPaymentComponent = Ember.Component.extend({
   session: Ember.inject.service(),

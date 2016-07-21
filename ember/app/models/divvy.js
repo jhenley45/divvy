@@ -14,6 +14,6 @@ export default DS.Model.extend({
       } else {
         return true;
       }
-    })
+    });
   }.property('users.@each', 'organizerId')
 });

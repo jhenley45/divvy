@@ -16,7 +16,17 @@ module('Integration - Edit Payment', {
 });
 
 
-// EDIT PAYMENT
+test('Should not have a button to allow the user to edit a payment from the trip if it belongs to that user', (assert) => {
+  let divvy = server.create('divvy');
+  let otherUser = server.create('user');
+  server.createList('payment', 3, { divvy, user: otherUser });
+
+  visit('/divvies/' + divvy.id);
+  andThen(() => {
+    assert.equal(find('i#edit-payment').length, 0);
+  });
+});
+
 test('Should have a button to allow the user to edit a payment from the trip if it belongs to that user', (assert) => {
   let divvy = server.create('divvy');
   let user = server.schema.users.find(1);
