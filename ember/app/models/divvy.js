@@ -5,15 +5,15 @@ export default DS.Model.extend({
   payments: DS.hasMany('payment'),
   settlements: DS.hasMany('settlements'),
   users: DS.hasMany('user'),
-  organizerId: DS.attr('number'),
+  organizer: DS.belongsTo('user', { inverse: 'organizedDivvies' }),
 
   usersWithoutOrganizer: function() {
     return this.get('users').filter((user) => {
-      if (user.get('id') === String(this.get('organizerId'))) {
+      if (user.get('id') === String(this.get('organizer.id'))) {
         return false;
       } else {
         return true;
       }
     });
-  }.property('users.@each', 'organizerId')
+  }.property('users.@each', 'organizer')
 });

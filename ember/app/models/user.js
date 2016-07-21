@@ -5,6 +5,7 @@ export default DS.Model.extend({
   isVenmoAuthorized: DS.attr('boolean'),
 
   divvy: DS.belongsTo('divvy'),
+  organizedDivvies: DS.hasMany('divvies', { inverse: 'organizer' }),
   payments: DS.hasMany('payment'),
   // settlements: DS.hasMany('settlement', {
   //   inverse: 'payer'

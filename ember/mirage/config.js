@@ -55,7 +55,7 @@ export default function() {
         payments: paymentIds,
         settlements: settlementIds,
         users: userIds,
-        organizerId: schema.users.first().id
+        organizer: schema.users.first().id
       }
     };
   });
@@ -91,7 +91,7 @@ export default function() {
   this.delete('payments/:id');
 
   this.put('payments/:id', (request) => {
-    console.log(request); // for some reason there is an error unless this is done in long form. 
+    console.log(request); // for some reason there is an error unless this is done in long form.
   });
 
   this.post('payments', (schema, request) => {
