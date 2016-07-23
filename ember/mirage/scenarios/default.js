@@ -15,5 +15,12 @@ export default function(server) {
       let user = server.create('user', { divvy: server.schema.divvies.find(i) });
       server.create('payment', { divvy: server.schema.divvies.find(i), user: user, amount: j });
     }
+
+    let div = server.schema.divvies.find(i);
+    let organizer = server.schema.users.find(1); // for testing, want to make one divvy where currentUser is organizer
+    if (i !== 1) {
+      organizer = div.users.models[i % 3];
+    }
+    div.update('organizer', organizer);
   }
 }

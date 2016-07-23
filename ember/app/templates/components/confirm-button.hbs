@@ -1,0 +1,9 @@
+<button {{action "showConfirm"}} class="standard-button">{{buttonText}}</button>
+
+{{#if showConfirm}}
+  <div>
+    {{confirmText}}
+    <button {{action "submitConfirm"}} class="standard-button">Yes</button>
+    <button {{action "hideConfirm"}} class="standard-button">No, cancel</button>
+  </div>
+{{/if}}

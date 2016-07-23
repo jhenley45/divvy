@@ -1,0 +1,57 @@
+<div class={{if divvy.settlements.length  "divvy-container" "divvy-container-full-width"}}>
+  <div class="divvy-heading border-top">
+    <div id="divvy-title">
+      {{divvy.title}}
+    </div>
+
+    <div class="row divvy-details full-width border-top no-margin">
+      <div class="divvy-members">
+        <span id="divvy-members-title" class="bold">Divvy members:</span>
+        <div class="divvy-member">
+          You
+        </div>
+        {{#each divvy.usersWithoutOrganizer as |user|}}
+          <div class="divvy-member">{{user.username}}</div>
+        {{/each}}
+        </div>
+      <div class="pull-right inline-block">
+        <div class="form-group no-margin inline-block">
+          {{input type="text" class="form-control" id='add-user' value=addUser size="20" placeholder="Search for users"}}
+        </div>
+        <div {{action "addUserToTrip"}} class="outline-button action-button inline-block">Add user</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="divvy-content">
+    <!-- PAYMENTS -->
+    <div class="row">
+      <div class="col-md-12 payments-content">
+
+        {{new-payment-form divvy=divvy flash='flashMessage'}}
+
+        {{#if divvy.payments}}
+          <div class="payments">
+            {{#each divvy.payments as |payment|}}
+              {{list-payment payment=payment flashMessage='flashMessage'}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="warning-block">
+            There are currently no payments for this divvy
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div> <!-- end divvy container -->
+
+{{!-- decide where to go --}}
+{{#if (eq divvy.organizer.id session.currentUser.id)}}
+  {{confirm-button
+    onConfirm=(action "deleteDivvy")
+    buttonText="Delete divvy"
+    confirmText="Are you sure you want to delete this divvy?"
+  }}
+{{/if}}

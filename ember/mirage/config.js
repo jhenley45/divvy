@@ -55,10 +55,27 @@ export default function() {
         payments: paymentIds,
         settlements: settlementIds,
         users: userIds,
-        organizer: schema.users.first().id
+        organizer: divvy.organizer.id
       }
     };
   });
+
+  this.get('divvies', (schema, request) => {
+    let divvies = schema.divvies.all();
+    var obj = {divvies: []};
+
+    for (let div of divvies.models) {
+      obj["divvies"].push({
+        id: div.id,
+        title: div.title,
+        payments: div.payments.models.mapBy('id'),
+        users: div.users.models.mapBy('id'),
+        organizer: div.organizer.id
+      });
+    }
+    return obj;
+  });
+
   this.get('payments/:id', (schema, request) => {
     let payment = schema.payments.find(request.params.id);
     let user = schema.users.find(parseInt(payment.user.id));
@@ -85,10 +102,10 @@ export default function() {
     };
   });
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
-  this.get('divvies');
   this.post('divvies');
   this.get('settlements/:id');
   this.delete('payments/:id');
+  this.delete('divvies/:id');
 
   this.put('payments/:id', (request) => {
     console.log(request); // for some reason there is an error unless this is done in long form.
