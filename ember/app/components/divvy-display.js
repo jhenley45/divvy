@@ -12,6 +12,9 @@ export default Ember.Component.extend({
       }, () => {
         this.sendAction('flashMessage', 'An error occurred while processing your request', 'warning');
       });
+    },
+    flashMessage() {
+      return true; // bubble that ish up
     }
 	}
 });

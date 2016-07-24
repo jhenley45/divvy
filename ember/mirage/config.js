@@ -48,6 +48,10 @@ export default function() {
     let paymentIds = schema.payments.where({divvyId: divvy.id}).models.mapBy('id');
     let settlementIds = schema.settlements.where({divvyId: divvy.id}).models.mapBy('id');
     let userIds = schema.users.where({divvyId: divvy.id}).models.mapBy('id');
+    let id = 1;
+    if (divvy.organizer) {
+      id = divvy.organizer.id;
+    }
     return {
       divvy: {
         id: divvy.id,
@@ -55,22 +59,26 @@ export default function() {
         payments: paymentIds,
         settlements: settlementIds,
         users: userIds,
-        organizer: divvy.organizer.id
+        organizer: id
       }
     };
   });
 
-  this.get('divvies', (schema, request) => {
+  this.get('divvies', (schema) => {
     let divvies = schema.divvies.all();
     var obj = {divvies: []};
 
     for (let div of divvies.models) {
+      let id = 1;
+      if (div.organizer) {
+        id = div.organizer.id;
+      }
       obj["divvies"].push({
         id: div.id,
         title: div.title,
         payments: div.payments.models.mapBy('id'),
         users: div.users.models.mapBy('id'),
-        organizer: div.organizer.id
+        organizer: id
       });
     }
     return obj;

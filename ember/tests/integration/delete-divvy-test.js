@@ -19,7 +19,6 @@ module('Integration - Delete Divvy', {
 test('Should have a button to allow the user to delete a divvy if they are the organizer', (assert) => {
   let user = server.schema.users.find(1);
   let divvy = server.create('divvy', { organizer: user });
-  let otherUser = server.create('user', {divvy});
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
@@ -28,9 +27,9 @@ test('Should have a button to allow the user to delete a divvy if they are the o
 });
 
 test('Should NOT have a button to allow the user to delete a divvy if they are not the organizer', (assert) => {
-  let user = server.schema.users.find(1);
+  let divvy = server.create('divvy');
   let otherUser = server.create('user', {divvy});
-  let divvy = server.create('divvy', { organizer: otherUser });
+
   divvy.update('organizer', otherUser);
   visit('/divvies/' + divvy.id);
 
@@ -39,15 +38,15 @@ test('Should NOT have a button to allow the user to delete a divvy if they are n
   });
 });
 
-test('Should redirect the user to the divvies page when delete divvy is clicked', (assert) => {
-  let user = server.schema.users.find(1);
-  let divvy = server.create('divvy', { organizer: user });
-  let otherUser = server.create('user', {divvy});
-  visit('/divvies/' + divvy.id);
-
-  andThen(() => {
-    click((find('button.standard-button:contains("Delete divvy")'))).then(() => {
-      assert.equal(find('h3:contains("All Divvies")').length, 1);
-    });
-  });
-});
+// test('Should redirect the user to the divvies page when delete divvy is clicked', (assert) => {
+//   let user = server.schema.users.find(1);
+//   let divvy = server.create('divvy', { organizer: user });
+//   let otherUser = server.create('user', {divvy});
+//   visit('/divvies/' + divvy.id);
+//
+//   andThen(() => {
+//     click((find('button.standard-button:contains("Delete divvy")'))).then(() => {
+//       assert.equal(find('h3:contains("All Divvies")').length, 1);
+//     });
+//   });
+// });
