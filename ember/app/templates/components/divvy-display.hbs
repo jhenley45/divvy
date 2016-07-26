@@ -8,7 +8,17 @@
     <div class="settlements">
       {{#each divvy.settlements as |settlement|}}
         <div class="settlement">
-          {{settlement.payer.username}} owes {{settlement.payee.username}} <span class="settlement-amount">${{settlement.amount}}</span>
+          {{#if (eq settlement.payer.id session.currentUser.id)}}
+            You owe
+          {{else}}
+            {{settlement.payer.username}} owes
+          {{/if}}
+          {{#if (eq settlement.payee.id session.currentUser.id)}}
+             you
+          {{else}}
+            {{settlement.payee.username}}
+          {{/if}}
+          <span class="settlement-amount">${{settlement.amount}}</span>
         </div>
       {{/each}}
     </div>

@@ -77,6 +77,20 @@ test('Should say who owes who for a settlement', function(assert) {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    assert.equal(find('div.settlement:contains("Steve owes Hank $3")').length, 4);
+    assert.equal(find('div.settlement:contains("Steve owes")').length, 4);
+    assert.equal(find('div.settlement:contains("Hank")').length, 4);
+  });
+});
+
+test('Should display "You" when current user is involved in a settlement', function(assert) {
+  let user = server.schema.users.find(1);
+  let divvy = server.create('divvy', { organizer: user });
+  let payer = server.create('user', {divvy, username: 'Steve'});
+  server.createList('settlement', 4, { divvy, amount: 3, payer, payee: user });
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    assert.equal(find('div.settlement:contains("you")').length, 4);
   });
 });
