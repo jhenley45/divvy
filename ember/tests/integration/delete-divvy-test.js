@@ -6,11 +6,11 @@ import signIn from '../helpers/sign-in';
 var App;
 
 module('Integration - Delete Divvy', {
-  beforeEach: function() {
+  beforeEach () {
     App = startApp();
     signIn();
   },
-  afterEach: function() {
+  afterEach () {
     Ember.run(App, 'destroy');
   }
 });

@@ -46,21 +46,32 @@ export default function() {
   this.get('/divvies/:id', (schema, request) => {
     let divvy = schema.divvies.find(request.params.id);
     let paymentIds = schema.payments.where({divvyId: divvy.id}).models.mapBy('id');
-    let settlementIds = schema.settlements.where({divvyId: divvy.id}).models.mapBy('id');
+    let settlements = divvy.settlements;
     let userIds = schema.users.where({divvyId: divvy.id}).models.mapBy('id');
     let id = 1;
     if (divvy.organizer) {
       id = divvy.organizer.id;
     }
+    let settleArray = []
+    for (let settlement of settlements.models) {
+      let obj = {};
+      obj["id"] = settlement.id;
+      obj["amount"] = settlement.amount;
+      obj["divvy"] = settlement.divvyId;
+
+      settleArray.push(obj);
+    }
+
     return {
       divvy: {
         id: divvy.id,
         title: divvy.title,
         payments: paymentIds,
-        settlements: settlementIds,
+        //settlements: settlements,
         users: userIds,
         organizer: id
-      }
+      },
+      settlements: settleArray
     };
   });
 

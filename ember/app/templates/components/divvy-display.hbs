@@ -1,3 +1,33 @@
+{{#if divvy.settlements.length}}
+  <div class="divvy-summary divvy-sidebar">
+    <div class="section-title">
+      Divvy Summary
+    </div>
+
+
+    <div class="settlements">
+      {{#each settlements as |settlement|}}
+        <div class="settlement">
+          {{settlement.payer.username}} owes {{settlement.payee.username}} <span class="settlement-amount">${{settlement.amount}}</span>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="">
+      {{#if isSettled}}
+        <div class="standard-button inactive-button" id="settle-divvy-button">Divvy Settled</div>
+      {{else}}
+        <div class="standard-button action-button" id="settle-divvy-button" {{action "confirmSettleDivvy"}}>Settle Divvy</div>
+      {{/if}}
+
+      {{#if confirmSettleDivvy}}
+        <button {{action "settleDivvy"}}class="standard-button">Yes</button>
+        <button {{action 'hideConfirmSettleDivvy'}} class="standard-button">No, cancel</button>
+      {{/if}}
+    </div>
+  </div>
+{{/if}}
+
 <div class={{if divvy.settlements.length  "divvy-container" "divvy-container-full-width"}}>
   <div class="divvy-heading border-top">
     <div id="divvy-title">
@@ -18,7 +48,7 @@
         <div class="form-group no-margin inline-block">
           {{input type="text" class="form-control" id='add-user' value=addUser size="20" placeholder="Search for users"}}
         </div>
-        <div {{action "addUserToTrip"}} class="outline-button action-button inline-block">Add user</div>
+        <div {{action "addUserToDivvy"}} class="outline-button action-button inline-block">Add user</div>
       </div>
     </div>
   </div>

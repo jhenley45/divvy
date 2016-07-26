@@ -1,5 +1,7 @@
-import { Model, belongsTo } from 'ember-cli-mirage';
+import { Model, belongsTo, hasMany } from 'ember-cli-mirage';
 
 export default Model.extend({
-  divvy: belongsTo()
+  divvy: belongsTo(),
+  debts: hasMany('settlements', { inverse: 'payer'} ),
+  credits: hasMany('settlements', { inverse: 'payee'} )
 });
