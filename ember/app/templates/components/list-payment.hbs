@@ -28,14 +28,16 @@
         </div>
       {{/if}}
     </div>
-    {{#if (eq payment.user.id session.currentUser.id)}}
-      <div class="col-md-2 payment-buttons">
-        <i {{action "toggleConfirmRemovePayment"}} id="remove-payment" class="fa payment-icon fa-times"></i>
-        <i {{action "showEditPayment"}} id="edit-payment" class="fa payment-icon fa-edit"></i>
-      </div>
-      {{#if updatePaymentError}}
-        <div class="message-box error-message">Error: {{updatePaymentError}}</div>
+    {{#unless divvy.isSettled}}
+      {{#if (eq payment.user.id session.currentUser.id)}}
+        <div class="col-md-2 payment-buttons">
+          <i {{action "toggleConfirmRemovePayment"}} class="fa payment-icon fa-times remove-payment"></i>
+          <i {{action "showEditPayment"}} class="fa payment-icon fa-edit edit-payment"></i>
+        </div>
+        {{#if updatePaymentError}}
+          <div class="message-box error-message">Error: {{updatePaymentError}}</div>
+        {{/if}}
       {{/if}}
-    {{/if}}
+    {{/unless}}
   </div>
 </div>

@@ -45,7 +45,7 @@ export default function() {
 
   this.get('/divvies/:id', (schema, request) => {
     let divvy = schema.divvies.find(request.params.id);
-    let paymentIds = schema.payments.where({divvyId: divvy.id}).models.mapBy('id');
+    let payments = divvy.payments.models;
     let settlements = divvy.settlements.models;
     let users = divvy.users.models;
     let id = 1;
@@ -74,17 +74,29 @@ export default function() {
       userArray.push(obj);
     }
 
+    let paymentArray = [];
+    for (let payment of payments) {
+      let obj = {};
+      obj["id"] = payment.id;
+      obj["description"] = payment.description;
+      obj["amount"] = payment.amount;
+      obj["divvy"] = payment.divvyId;
+      obj["user"] = payment.userId;
+      paymentArray.push(obj);
+    }
+
     return {
       divvy: {
         id: divvy.id,
         title: divvy.title,
-        payments: paymentIds,
+        payments: payments.mapBy('id'),
         settlements: settlements.mapBy('id'),
         users: users.mapBy('id'),
         organizer: id
       },
       settlements: settleArray,
-      users: userArray
+      users: userArray,
+      payments: paymentArray
     };
   });
 
@@ -138,6 +150,9 @@ export default function() {
   this.get('settlements/:id');
   this.delete('payments/:id');
   this.delete('divvies/:id');
+  this.put('/divvies/:id', (request) => {
+    console.log(request); // for some reason there is an error unless this is done in long form.
+  });
 
   this.put('payments/:id', (request) => {
     console.log(request); // for some reason there is an error unless this is done in long form.

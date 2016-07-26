@@ -24,16 +24,15 @@
     </div>
 
     <div class="">
-      {{#if isSettled}}
-        <div class="standard-button inactive-button" id="settle-divvy-button">Divvy Settled</div>
-      {{else}}
-        <div class="standard-button action-button" id="settle-divvy-button" {{action "confirmSettleDivvy"}}>Settle Divvy</div>
-      {{/if}}
-
-      {{#if confirmSettleDivvy}}
-        <button {{action "settleDivvy"}}class="standard-button">Yes</button>
-        <button {{action 'hideConfirmSettleDivvy'}} class="standard-button">No, cancel</button>
-      {{/if}}
+      {{#unless divvy.isSettled}}
+        {{#if (eq divvy.organizer.id session.currentUser.id)}}
+          {{confirm-button
+            onConfirm=(action "settleDivvy")
+            buttonText="Settle divvy"
+            confirmText="Are you sure you want to settle this divvy?"
+          }}
+        {{/if}}
+      {{/unless}}
     </div>
   </div>
 {{/if}}
@@ -53,13 +52,15 @@
         {{#each divvy.usersWithoutOrganizer as |user|}}
           <div class="divvy-member">{{user.username}}</div>
         {{/each}}
-        </div>
-      <div class="pull-right inline-block">
-        <div class="form-group no-margin inline-block">
-          {{input type="text" class="form-control" id='add-user' value=addUser size="20" placeholder="Search for users"}}
-        </div>
-        <div {{action "addUserToDivvy"}} class="outline-button action-button inline-block">Add user</div>
       </div>
+      {{#unless divvy.isSettled}}
+        <div class="pull-right inline-block">
+          <div class="form-group no-margin inline-block">
+            {{input type="text" class="form-control" id='add-user' value=addUser size="20" placeholder="Search for users"}}
+          </div>
+          <div {{action "addUserToDivvy"}} class="outline-button action-button inline-block">Add user</div>
+        </div>
+      {{/unless}}
     </div>
   </div>
 
@@ -68,13 +69,18 @@
     <!-- PAYMENTS -->
     <div class="row">
       <div class="col-md-12 payments-content">
+        {{#if divvy.isSettled}}
+          <div class="divvy-header">
+            This divvy has been settled and is no longer active
+          </div>
+        {{else}}
+          {{new-payment-form divvy=divvy flash='flashMessage'}}
+        {{/if}}
 
-        {{new-payment-form divvy=divvy flash='flashMessage'}}
-
-        {{#if divvy.payments}}
+        {{#if divvy.payments.length}}
           <div class="payments">
             {{#each divvy.payments as |payment|}}
-              {{list-payment payment=payment flashMessage='flashMessage'}}
+              {{list-payment payment=payment flashMessage='flashMessage' divvy=divvy}}
             {{/each}}
           </div>
         {{else}}

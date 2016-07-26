@@ -1,6 +1,6 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  description: "test payment",
+  description(i) {return "test payment " + i},
   amount: 1
 });
