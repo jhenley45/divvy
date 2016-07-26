@@ -25,7 +25,7 @@ test('Should have a button to allow the user to delete a payment from the trip i
   visit('/divvies/' + divvy.id);
   andThen(() => {
     triggerEvent(".payment:contains('You')", "mouseenter").then(() => {
-      assert.equal(find('i#remove-payment').length, 1);
+      assert.equal(find('i.remove-payment').length, 1);
     });
   });
 });
@@ -38,7 +38,7 @@ test('Should confirm that the payment should be deleted when user clicks to dele
   visit('/divvies/' + divvy.id);
   andThen(() => {
     triggerEvent(".payment:contains('You')", "mouseenter").then(function() {
-      click(find('i#remove-payment')).then(function() {
+      click(find('i.remove-payment')).then(function() {
         assert.equal(find('button:contains("Yes")').length, 1);
       });
     });
@@ -55,7 +55,7 @@ test('Should delete the payment when the user clicks to confirm the deletion', f
   visit('/divvies/' + divvy.id);
   andThen(() => {
     triggerEvent(".payment:contains('You')", "mouseenter").then(function() {
-      click(find('i#remove-payment')).then(function() {
+      click(find('i.remove-payment')).then(function() {
         click(find('button:contains("Yes")')).then(function() {
           assert.equal(find('div.payment').length, 3);
         });
@@ -72,7 +72,7 @@ test('Should display a cancel delete button when user clicks to delete payment',
   visit('/divvies/' + divvy.id);
   andThen(() => {
     triggerEvent(".payment:contains('You')", "mouseenter").then(() => {
-      click(find('i#remove-payment')).then(() => {
+      click(find('i.remove-payment')).then(() => {
         assert.equal(find('button:contains("No, cancel")').length, 1);
       });
     });
@@ -87,7 +87,7 @@ test('Should hide the delete payment option when the user clicks to cancel the d
   visit('/divvies/' + divvy.id);
   andThen(() => {
     triggerEvent(".payment:contains('You')", "mouseenter").then(() => {
-      click(find('i#remove-payment')).then(() => {
+      click(find('i.remove-payment')).then(() => {
         click(find('button:contains("No, cancel")')).then(() => {
           assert.equal(find('button:contains("No, cancel")').length, 0);
         });

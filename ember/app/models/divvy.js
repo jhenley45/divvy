@@ -6,6 +6,7 @@ export default DS.Model.extend({
   settlements: DS.hasMany('settlements'),
   users: DS.hasMany('user'),
   organizer: DS.belongsTo('user', { inverse: 'organizedDivvies' }),
+  isSettled: DS.attr('boolean'),
 
   usersWithoutOrganizer: function() {
     return this.get('users').filter((user) => {
