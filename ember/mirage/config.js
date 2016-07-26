@@ -46,20 +46,32 @@ export default function() {
   this.get('/divvies/:id', (schema, request) => {
     let divvy = schema.divvies.find(request.params.id);
     let paymentIds = schema.payments.where({divvyId: divvy.id}).models.mapBy('id');
-    let settlements = divvy.settlements;
-    let userIds = schema.users.where({divvyId: divvy.id}).models.mapBy('id');
+    let settlements = divvy.settlements.models;
+    let users = divvy.users.models;
     let id = 1;
     if (divvy.organizer) {
       id = divvy.organizer.id;
     }
     let settleArray = []
-    for (let settlement of settlements.models) {
+    for (let settlement of settlements) {
       let obj = {};
       obj["id"] = settlement.id;
       obj["amount"] = settlement.amount;
       obj["divvy"] = settlement.divvyId;
-
+      obj["payer"] = settlement.payerId;
+      obj["payee"] = settlement.payeeId;
       settleArray.push(obj);
+    }
+
+    let userArray = []
+    for (let user of users) {
+      let obj = {};
+      obj["id"] = user.id;
+      obj["username"] = user.username;
+      obj["divvy"] = user.divvyId;
+      obj["credits"] = user.credits.models.mapBy('id');
+      obj["debts"] = user.debts.models.mapBy('id');
+      userArray.push(obj);
     }
 
     return {
@@ -67,11 +79,12 @@ export default function() {
         id: divvy.id,
         title: divvy.title,
         payments: paymentIds,
-        //settlements: settlements,
-        users: userIds,
+        settlements: settlements.mapBy('id'),
+        users: users.mapBy('id'),
         organizer: id
       },
-      settlements: settleArray
+      settlements: settleArray,
+      users: userArray
     };
   });
 

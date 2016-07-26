@@ -1,5 +1,5 @@
 import { Factory } from 'ember-cli-mirage';
 
 export default Factory.extend({
-  amount(i) { return `amount ${i}`; }
+  amount(i) { return i; }
 });

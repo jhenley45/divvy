@@ -6,7 +6,7 @@
 
 
     <div class="settlements">
-      {{#each settlements as |settlement|}}
+      {{#each divvy.settlements as |settlement|}}
         <div class="settlement">
           {{settlement.payer.username}} owes {{settlement.payee.username}} <span class="settlement-amount">${{settlement.amount}}</span>
         </div>
