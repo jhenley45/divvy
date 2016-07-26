@@ -18,7 +18,6 @@ module('Integration - Settlement test', {
 test('Should show the Trip Summary sidebar when there are settlements', (assert) => {
   let user = server.schema.users.find(1);
   let divvy = server.create('divvy', { organizer: user });
-  let otherUser = server.create('user', {divvy});
   server.createList('settlement', 4, { divvy });
 
   visit('/divvies/' + divvy.id);
@@ -32,7 +31,6 @@ test('Should show the Trip Summary sidebar when there are settlements', (assert)
 test('Should NOT show the Trip Summary sidebar when there are no settlements', function(assert) {
   let user = server.schema.users.find(1);
   let divvy = server.create('divvy', { organizer: user });
-  let otherUser = server.create('user', {divvy});
 
   visit('/divvies/' + divvy.id);
 
@@ -44,7 +42,6 @@ test('Should NOT show the Trip Summary sidebar when there are no settlements', f
 test('Should show a list of all settlements', function(assert) {
   let user = server.schema.users.find(1);
   let divvy = server.create('divvy', { organizer: user });
-  let otherUser = server.create('user', {divvy});
   server.createList('settlement', 4, { divvy });
 
   visit('/divvies/' + divvy.id);
@@ -57,7 +54,6 @@ test('Should show a list of all settlements', function(assert) {
 test('Should say the amount for each settlement', function(assert) {
   let user = server.schema.users.find(1);
   let divvy = server.create('divvy', { organizer: user });
-  let otherUser = server.create('user', {divvy});
   server.createList('settlement', 4, { divvy, amount: 3 });
 
   visit('/divvies/' + divvy.id);

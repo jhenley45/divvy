@@ -30,7 +30,7 @@ export default function(server) {
       let payeeId = Math.floor((Math.random() * divvyNumber) + 1);
       let payer = server.schema.users.find(payerId);
       let payee = server.schema.users.find(payeeId);
-      server.createList('settlement', 4, {divvy, payer, payee})
+      server.createList('settlement', 4, {divvy, payer, payee});
     }
   }
 }

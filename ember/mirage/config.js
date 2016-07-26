@@ -52,7 +52,7 @@ export default function() {
     if (divvy.organizer) {
       id = divvy.organizer.id;
     }
-    let settleArray = []
+    let settleArray = [];
     for (let settlement of settlements) {
       let obj = {};
       obj["id"] = settlement.id;
@@ -63,7 +63,7 @@ export default function() {
       settleArray.push(obj);
     }
 
-    let userArray = []
+    let userArray = [];
     for (let user of users) {
       let obj = {};
       obj["id"] = user.id;
