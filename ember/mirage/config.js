@@ -114,6 +114,7 @@ export default function() {
         title: div.title,
         payments: div.payments.models.mapBy('id'),
         users: div.users.models.mapBy('id'),
+        settlements: div.settlements.models.mapBy('id'),
         organizer: id
       });
     }
@@ -127,7 +128,8 @@ export default function() {
       payment: {
         id: payment.id,
         amount: payment.amount,
-        user: user.id
+        user: user.id,
+        description: payment.description
       }
     };
   });
@@ -145,9 +147,21 @@ export default function() {
       }
     };
   });
+  this.get('settlements/:id', (schema, request) => {
+    let settlement = schema.settlements.find(request.params.id);
+    return {
+      settlement: {
+        id: settlement.id,
+        amount: settlement.amount,
+        divvy: settlement.divvyId,
+        payer: settlement.payerId,
+        payee: settlement.payeeId
+      }
+    }
+  });
+
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
   this.post('divvies');
-  this.get('settlements/:id');
   this.delete('payments/:id');
   this.delete('divvies/:id');
   this.put('/divvies/:id', (request) => {
