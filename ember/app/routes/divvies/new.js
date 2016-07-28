@@ -4,7 +4,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
     transitionToDivvy (divvy) {
-      this.transitionTo('divvy', divvy);
+      this.transitionTo('divvy', divvy.id);
     }
   }
 });

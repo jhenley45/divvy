@@ -3,7 +3,7 @@
 <ul>
 	{{#each model as |divvy|}}
 		<li class='divvy-list'>
-			{{#link-to 'divvy' divvy}}
+			{{#link-to 'divvy' divvy.id}}
 			  {{divvy.title}}
 			{{/link-to}}
 		</li>

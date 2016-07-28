@@ -8,6 +8,7 @@ export default function(server) {
   */
   let divvyNumber = 10;
   let divvies = server.createList('divvy', divvyNumber);
+  server.createList('user', 20);
 
   // create a payment for each divvy
   for (let i = 1; i < divvyNumber + 1; i++) {

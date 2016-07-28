@@ -157,7 +157,7 @@ export default function() {
         payer: settlement.payerId,
         payee: settlement.payeeId
       }
-    }
+    };
   });
 
   // FOLLOWING CONVENTION, SO CAN SUB ABOVE WITH BELOW
@@ -188,6 +188,8 @@ export default function() {
     }
     return schema.users.create(params);
   });
+
+  this.get('users');
 
 
 
