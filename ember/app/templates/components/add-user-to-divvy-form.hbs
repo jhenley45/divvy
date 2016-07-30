@@ -1,4 +1,12 @@
-<div class="form-group no-margin inline-block">
-  {{input type="text" class="form-control" id='add-user' value=addUser size="20" placeholder="Search for users"}}
+<div class="form-group no-margin inline-block power-select-container">
+  {{#power-select-multiple
+    id='add-user'
+    placeholder="Search for divvy users..."
+    options=users
+    selected=user
+    noMatchesMessage="No users found that match your search"
+    onchange=(action (mut user)) as |user|}}
+    {{user.username}}
+  {{/power-select-multiple}}
 </div>
 <div {{action "addUserToDivvy"}} class="outline-button action-button inline-block">Add user</div>

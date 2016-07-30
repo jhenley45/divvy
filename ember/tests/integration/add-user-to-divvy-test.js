@@ -33,8 +33,39 @@ test('Should display a list of users when input is focused', function(assert) {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    click(find('input#add-user')).then(() => {
-      assert.equal(find('li.divvy-user-list').length, 5);
+    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
+      assert.equal(find('li.ember-power-select-option').length, 4);
     });
   });
 });
+
+test('Should add user to input field when clicked', function(assert) {
+  let divvy = server.create('divvy');
+  server.createList('user', 3, {divvy});
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
+      click(find('li.ember-power-select-option:contains("User 1")')).then(() => {
+        assert.equal(find('.ember-power-select-multiple-remove-btn').length, 1);
+      });
+    });
+  });
+});
+
+test('Should display message when no users match search', function(assert) {
+  let divvy = server.create('divvy');
+  server.createList('user', 3, {divvy});
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    fillIn(find('.ember-power-select-trigger-multiple-input'), 'meowmix is the best').then(() => {
+      assert.equal(find('li:contains("No users found")').length, 1);
+    });
+  });
+});
+
+// should filter search resutls based on input
+// should
