@@ -2,11 +2,11 @@
   {{#power-select-multiple
     id='add-user'
     placeholder="Search for divvy users..."
-    options=users
-    selected=user
+    options=filteredUsers
+    selected=selectedUsers
     noMatchesMessage="No users found that match your search"
-    onchange=(action (mut user)) as |user|}}
+    onchange=(action (mut selectedUsers)) as |user|}}
     {{user.username}}
   {{/power-select-multiple}}
 </div>
-<div {{action "addUserToDivvy"}} class="outline-button action-button inline-block">Add user</div>
+<div {{action "addUsersToDivvy"}} class="outline-button action-button inline-block">Add user</div>

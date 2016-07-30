@@ -189,7 +189,22 @@ export default function() {
     return schema.users.create(params);
   });
 
-  this.get('users');
+  this.get('users', (schema, request) => {
+    let users = schema.users.all();
+
+    let userArray = [];
+    for (let user of users.models) {
+      let obj = {};
+      obj["id"] = user.id;
+      obj["username"] = user.username;
+      obj["divvy"] = user.divvyId;
+      obj["credits"] = user.credits.models.mapBy('id');
+      obj["debts"] = user.debts.models.mapBy('id');
+      userArray.push(obj);
+    }
+
+    return { users: userArray }
+  });
 
 
 
