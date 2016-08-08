@@ -189,7 +189,7 @@ export default function() {
     return schema.users.create(params);
   });
 
-  this.get('users', (schema, request) => {
+  this.get('users', (schema) => {
     let users = schema.users.all();
 
     let userArray = [];
@@ -203,7 +203,7 @@ export default function() {
       userArray.push(obj);
     }
 
-    return { users: userArray }
+    return { users: userArray };
   });
 
 

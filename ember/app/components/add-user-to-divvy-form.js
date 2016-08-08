@@ -15,7 +15,7 @@ export default Ember.Component.extend({
       let currentUserId = this.get('session.currentUser.id');
       divvyUserIds.pushObject(currentUserId);
 
-      return users.reject((user, index, users) => {
+      return users.reject((user) => {
         let userId = user.get('id');
         return divvyUserIds.contains(userId);
       });

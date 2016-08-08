@@ -14,7 +14,6 @@ export default Ember.Component.extend({
       let amount = this.get('amount');
       let description = this.get('description');
       let user = this.get('session').get('currentUser');
-      console.log("USER ID: " + user.get('id'))
 
       if (!amount || amount.length < 1 || $.trim(amount) === "") {
         this.set('formError', 'Amount field cannot be empty');
