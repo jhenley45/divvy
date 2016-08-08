@@ -15,7 +15,7 @@ module('Integration - Add User To Divvy', {
   }
 });
 
-test('Should have a button to allow you to add a user to a trip', function(assert) {
+test('Should have a button to allow you to add a user to a trip', (assert) => {
   let divvy = server.create('divvy');
   server.createList('user', 3, {divvy});
 
@@ -26,7 +26,7 @@ test('Should have a button to allow you to add a user to a trip', function(asser
   });
 });
 
-test('Should display a list of users when input is focused', function(assert) {
+test('Should display a list of users when input is focused', (assert) => {
   let divvy = server.create('divvy');
   server.createList('user', 3, {divvy});
   server.createList('user', 5);
@@ -35,12 +35,12 @@ test('Should display a list of users when input is focused', function(assert) {
 
   andThen(() => {
     click(find('.ember-power-select-trigger-multiple-input')).then(() => {
-      assert.equal(find('li.ember-power-select-option').length, 6);
+      assert.equal(find('li.ember-power-select-option').length, 5);
     });
   });
 });
 
-test('Should add user to input field when clicked', function(assert) {
+test('Should add user to input field when clicked', (assert) => {
   let divvy = server.create('divvy');
   server.createList('user', 3, {divvy});
   server.createList('user', 5);
@@ -56,7 +56,7 @@ test('Should add user to input field when clicked', function(assert) {
   });
 });
 
-test('Should display message when no users match search', function(assert) {
+test('Should display message when no users match search', (assert) => {
   let divvy = server.create('divvy');
   server.createList('user', 3, {divvy});
 
@@ -69,7 +69,7 @@ test('Should display message when no users match search', function(assert) {
   });
 });
 
-test('Should not show users who are already part of the divvy', function(assert) {
+test('Should not show users who are already part of the divvy', (assert) => {
   let divvy = server.create('divvy');
   server.createList('user', 3, {divvy});
   server.createList('user', 5);
@@ -78,7 +78,24 @@ test('Should not show users who are already part of the divvy', function(assert)
 
   andThen(() => {
     click(find('.ember-power-select-trigger-multiple-input')).then(() => {
-      assert.equal(find('li.ember-power-select-option').length, 6);
+      assert.equal(find('li.ember-power-select-option').length, 5);
+    });
+  });
+});
+
+test('Should not show current user in the dropdown', (assert) => {
+  let divvy = server.create('divvy');
+  server.createList('user', 3, {divvy});
+  server.createList('user', 5);
+
+  let user = server.schema.users.find(1);
+  user.divvy = divvy;
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
+      assert.equal(find('li.ember-power-select-option:contains("Leo Mein")').length, 0);
     });
   });
 });

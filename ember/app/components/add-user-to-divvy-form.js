@@ -8,13 +8,16 @@ export default Ember.Component.extend({
 
   session: Ember.inject.service(),
 
-  filteredUsers: computed('users.[]', {
+  filteredUsers: computed('users.[]', 'session.currentUser.id', {
     get() {
-      let divvyId = this.get('divvy.id');
+      let divvyUserIds = this.get('divvy.users').mapBy('id');
       let users = this.get('users');
+      let currentUserId = this.get('session.currentUser.id');
+      divvyUserIds.pushObject(currentUserId);
 
       return users.reject((user, index, users) => {
-        return user.get('divvy.id') === divvyId;
+        let userId = user.get('id');
+        return divvyUserIds.contains(userId);
       });
     }
   }),
