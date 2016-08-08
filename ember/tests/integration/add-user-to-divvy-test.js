@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../helpers/start-app';
 import signIn from '../helpers/sign-in';
+import { clickTrigger } from '../helpers/ember-power-select';
 
 var App;
 
@@ -34,9 +35,8 @@ test('Should display a list of users when input is focused', (assert) => {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
-      assert.equal(find('li.ember-power-select-option').length, 5);
-    });
+    clickTrigger(".select-add-user");
+    assert.equal(find('li.ember-power-select-option').length, 5);
   });
 });
 
@@ -48,9 +48,27 @@ test('Should add user to input field when clicked', (assert) => {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
-      click(find('li.ember-power-select-option:contains("User 5")')).then(() => {
-        assert.equal(find('.ember-power-select-multiple-remove-btn').length, 1);
+    selectChoose('.select-add-user', 'User 5');
+    andThen(() => {
+      assert.equal(find('.ember-power-select-multiple-remove-btn').length, 1);
+    });
+  });
+});
+
+test('Should remove selected user from the input field when clicked', (assert) => {
+  let divvy = server.create('divvy');
+  server.createList('user', 3, {divvy});
+  server.createList('user', 5);
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    selectChoose('.select-add-user', 'User 5');
+    andThen(() => {
+      assert.equal(find('.ember-power-select-multiple-remove-btn').length, 1);
+      removeMultipleOption('.select-add-user', 'User 5');
+      andThen(() => {
+        assert.equal(find('.ember-power-select-multiple-remove-btn').length, 0);
       });
     });
   });
@@ -63,7 +81,8 @@ test('Should display message when no users match search', (assert) => {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    fillIn(find('.ember-power-select-trigger-multiple-input'), 'meowmix is the best').then(() => {
+    selectSearch('.select-add-user', 'meowmix is the best');
+    andThen(() => {
       assert.equal(find('li:contains("No users found")').length, 1);
     });
   });
@@ -77,9 +96,8 @@ test('Should not show users who are already part of the divvy', (assert) => {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
-      assert.equal(find('li.ember-power-select-option').length, 5);
-    });
+    clickTrigger(".select-add-user");
+    assert.equal(find('li.ember-power-select-option').length, 5);
   });
 });
 
@@ -94,12 +112,26 @@ test('Should not show current user in the dropdown', (assert) => {
   visit('/divvies/' + divvy.id);
 
   andThen(() => {
-    click(find('.ember-power-select-trigger-multiple-input')).then(() => {
-      assert.equal(find('li.ember-power-select-option:contains("Leo Mein")').length, 0);
+    clickTrigger(".select-add-user");
+    assert.equal(find('li.ember-power-select-option:contains("Leo Mein")').length, 0);
+  });
+});
+
+test('Should filter search results when input is given and there is a match', (assert) => {
+  let divvy = server.create('divvy');
+  server.create('user', {username: "meow"});
+  server.create('user', {username: "meow two"});
+  server.create('user', {divvy, username: "captain ahab"});
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    selectSearch('.select-add-user', 'm');
+    andThen(() => {
+      assert.equal(find('li.ember-power-select-option').length, 2);
     });
   });
 });
 
-// does not display users already in list
-// should filter search resutls based on input
-// should
+// should clear selected options from results when clicked (use removeMultipleOption helper)
+// should add user(s) to the trip if selected
