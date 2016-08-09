@@ -55,7 +55,7 @@
       </div>
       {{#unless divvy.isSettled}}
         <div class="pull-right inline-block">
-          {{add-user-to-divvy-form divvy=divvy users=users}}
+          {{add-user-to-divvy-form divvy=divvy users=users selectedUsers=selectedUsers addUsers=(action "addUsersToDivvy")}}
         </div>
       {{/unless}}
     </div>

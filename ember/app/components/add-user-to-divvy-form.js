@@ -4,9 +4,13 @@ const {computed} = Ember;
 
 export default Ember.Component.extend({
 
-  selectedUsers: [],
-
   session: Ember.inject.service(),
+
+  actions: {
+    clickAddUsers() {
+      this.get('addUsers')();
+    }
+  },
 
   filteredUsers: computed('users.[]', 'session.currentUser.id', {
     get() {

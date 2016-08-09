@@ -2,6 +2,8 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
 
+  selectedUsers: [],
+
   session: Ember.inject.service(),
 
 	actions: {
@@ -27,5 +29,10 @@ export default Ember.Component.extend({
         divvy.set('isSettled', false);
       });
     },
+    addUsersToDivvy() {
+      let users = this.get('selectedUsers');
+      users.setEach('divvy', this.get('divvy'));
+      users.forEach(user => user.save());
+    }
 	}
 });

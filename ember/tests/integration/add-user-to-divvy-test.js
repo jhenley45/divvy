@@ -133,5 +133,20 @@ test('Should filter search results when input is given and there is a match', (a
   });
 });
 
-// should clear selected options from results when clicked (use removeMultipleOption helper)
 // should add user(s) to the trip if selected
+test('Should add user to trip when add user button is clicked', (assert) => {
+  let divvy = server.create('divvy');
+  server.createList('user', 3, {divvy});
+  server.createList('user', 5);
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    selectChoose('.select-add-user', 'User 5');
+    andThen(() => {
+      click(find('.action-button:contains("Add user")')).then(() => {
+        assert.equal(find('.divvy-member:contains("User 5")').length, 1);
+      });
+    });
+  });
+});

@@ -172,6 +172,10 @@ export default function() {
     console.log(request); // for some reason there is an error unless this is done in long form.
   });
 
+  this.put('users/:id', (request) => {
+    console.log(request); // for some reason there is an error unless this is done in long form.
+  });
+
   this.post('payments', (schema, request) => {
     var params = JSON.parse(JSON.stringify(request.requestBody));
 
