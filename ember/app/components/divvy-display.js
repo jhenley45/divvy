@@ -30,9 +30,10 @@ export default Ember.Component.extend({
       });
     },
     addUsersToDivvy() {
+      // This is where we need to figure out the has many through, because it will override existing divvy right now
       let users = this.get('selectedUsers');
       users.setEach('divvy', this.get('divvy'));
-      users.forEach(user => user.save());
+      users.forEach(user => user.save().then((user) => this.get('selectedUsers').removeObject(user)));
     }
 	}
 });

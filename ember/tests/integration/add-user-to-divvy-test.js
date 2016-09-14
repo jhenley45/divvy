@@ -150,3 +150,22 @@ test('Should add user to trip when add user button is clicked', (assert) => {
     });
   });
 });
+
+
+// should clear form after user is added to trip
+test('Should clear added user from the form once user is added', (assert) => {
+  let divvy = server.create('divvy');
+  server.createList('user', 3, {divvy});
+  server.createList('user', 5);
+
+  visit('/divvies/' + divvy.id);
+
+  andThen(() => {
+    selectChoose('.select-add-user', 'User 5');
+    andThen(() => {
+      click(find('.action-button:contains("Add user")')).then(() => {
+        assert.equal(find('.ember-power-select-multiple-remove-btn').length, 0);
+      });
+    });
+  });
+});

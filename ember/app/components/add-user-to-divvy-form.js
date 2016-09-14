@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     }
   },
 
-  filteredUsers: computed('users.[]', 'session.currentUser.id', {
+  filteredUsers: computed('users.[]', 'session.currentUser.id', 'selectedUsers.[]', {
     get() {
       let divvyUserIds = this.get('divvy.users').mapBy('id');
       let users = this.get('users');
